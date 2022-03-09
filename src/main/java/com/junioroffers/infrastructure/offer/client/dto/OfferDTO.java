@@ -1,17 +1,15 @@
 package com.junioroffers.infrastructure.offer.client.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@NoArgsConstructor
 public class OfferDTO {
 
     private String id;
     private String companyName;
     private String jobPosition;
     private String salary;
+    private String offerUrl;
 
 }
