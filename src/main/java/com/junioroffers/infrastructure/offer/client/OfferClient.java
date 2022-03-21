@@ -23,13 +23,14 @@ public class OfferClient implements RemoteOfferClient{
             ResponseEntity<List<OfferDTO>> responseEntity = restClient.callGetMethod(new ParameterizedTypeReference<List<OfferDTO>>() {
             });
             offerDTOList = responseEntity.getBody();
-            if (offerDTOList == null) {
+            if (offerDTOList != null && offerDTOList.isEmpty()) {
                 throw new OfferNotFoundException("There are no offers");
             }
 
         }catch (RestClientException e){
             throw new HttpClientException(e.getMessage());
         }
+
         return offerDTOList;
 
     }
