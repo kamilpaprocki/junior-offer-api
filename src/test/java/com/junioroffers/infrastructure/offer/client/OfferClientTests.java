@@ -1,6 +1,6 @@
 package com.junioroffers.infrastructure.offer.client;
 
-import com.junioroffers.infrastructure.offer.client.dto.OfferDTO;
+import com.junioroffers.infrastructure.offer.client.dto.OfferDto;
 import com.junioroffers.infrastructure.offer.client.exceptions.OfferNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -17,23 +17,23 @@ import static org.mockito.Mockito.when;
 public class OfferClientTests {
 
     @Test
-    public void should_return_offer_DTOs_list() {
+    public void should_return_offers_list() {
         //GIVEN
         RestClient restClient = Mockito.mock(RestClient.class);
-        when(restClient.callGetMethod(ArgumentMatchers.<ParameterizedTypeReference<List<OfferDTO>>>any()))
-                .thenReturn(new ResponseEntity<>(Collections.singletonList(new OfferDTO()), HttpStatus.ACCEPTED));
+        when(restClient.callGetMethod(ArgumentMatchers.<ParameterizedTypeReference<List<OfferDto>>>any()))
+                .thenReturn(new ResponseEntity<>(Collections.singletonList(new OfferDto()), HttpStatus.ACCEPTED));
         OfferClient offerClient = new OfferClient(restClient);
         //WHEN
-        List<OfferDTO> offerDTOS = offerClient.getOffers();
+        List<OfferDto> offers = offerClient.getOffers();
         //THEN
-        assertThat(offerDTOS.size()).isEqualTo(1);
+        assertThat(offers.size()).isEqualTo(1);
     }
 
     @Test
     public void should_throw_OfferNotFoundException_when_return_list_is_empty() {
         //GIVEN
         RestClient restClient = Mockito.mock(RestClient.class);
-        when(restClient.callGetMethod(ArgumentMatchers.<ParameterizedTypeReference<List<OfferDTO>>>any()))
+        when(restClient.callGetMethod(ArgumentMatchers.<ParameterizedTypeReference<List<OfferDto>>>any()))
                 .thenReturn(null);
         OfferClient offerClient = new OfferClient(restClient);
         //WHEN THEN

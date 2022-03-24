@@ -1,6 +1,6 @@
 package com.junioroffers.infrastructure.offer.client;
 
-import com.junioroffers.infrastructure.offer.client.dto.OfferDTO;
+import com.junioroffers.infrastructure.offer.client.dto.OfferDto;
 import com.junioroffers.infrastructure.offer.client.exceptions.HttpClientException;
 import com.junioroffers.infrastructure.offer.client.exceptions.OfferNotFoundException;
 import lombok.AllArgsConstructor;
@@ -16,18 +16,18 @@ public class OfferClient implements RemoteOfferClient {
 
     private final RestClient restClient;
 
-    public List<OfferDTO> getOffers() {
-        List<OfferDTO> offerDTOList;
+    public List<OfferDto> getOffers() {
+        List<OfferDto> offers;
         try {
-            ResponseEntity<List<OfferDTO>> responseEntity = restClient.callGetMethod(new ParameterizedTypeReference<List<OfferDTO>>() {
+            ResponseEntity<List<OfferDto>> responseEntity = restClient.callGetMethod(new ParameterizedTypeReference<List<OfferDto>>() {
             });
-            offerDTOList = responseEntity.getBody();
-            if (offerDTOList != null && offerDTOList.isEmpty()) {
+            offers = responseEntity.getBody();
+            if (offers != null && offers.isEmpty()) {
                 throw new OfferNotFoundException("There are no offers");
             }
         } catch (RestClientException e) {
             throw new HttpClientException(e.getMessage());
         }
-        return offerDTOList;
+        return offers;
     }
 }

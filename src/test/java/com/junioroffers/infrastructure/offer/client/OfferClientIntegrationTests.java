@@ -2,7 +2,7 @@ package com.junioroffers.infrastructure.offer.client;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import com.junioroffers.infrastructure.offer.client.dto.OfferDTO;
+import com.junioroffers.infrastructure.offer.client.dto.OfferDto;
 import com.junioroffers.infrastructure.offer.client.exceptions.HttpClientException;
 import com.junioroffers.infrastructure.offer.client.exceptions.OfferNotFoundException;
 import org.json.JSONArray;
@@ -51,7 +51,7 @@ public class OfferClientIntegrationTests {
                         .withHeader("Content-Type", "application/json")
                         .withBody(bodyWithJsons())));
         //then
-        then(remoteOfferClient.getOffers()).containsExactlyInAnyOrderElementsOf(Arrays.asList(firstOfferDTO(), secondOfferDTO()));
+        then(remoteOfferClient.getOffers()).containsExactlyInAnyOrderElementsOf(Arrays.asList(firstOfferDto(), secondOfferDto()));
     }
 
     @Test
@@ -108,8 +108,8 @@ public class OfferClientIntegrationTests {
         return "[]";
     }
 
-    private OfferDTO firstOfferDTO() {
-        return OfferDTO.builder()
+    private OfferDto firstOfferDto() {
+        return OfferDto.builder()
                 .companyName("S2Innovation Sp. z o. o.")
                 .jobPosition("Junior Remote Java Developer")
                 .salary("4k - 8k PLN")
@@ -117,8 +117,8 @@ public class OfferClientIntegrationTests {
                 .build();
     }
 
-    private OfferDTO secondOfferDTO() {
-        return OfferDTO.builder()
+    private OfferDto secondOfferDto() {
+        return OfferDto.builder()
                 .companyName("HARMAN Connected Services")
                 .jobPosition("Junior Java SE Developer for Automotive")
                 .salary("7k - 10k PLN")
