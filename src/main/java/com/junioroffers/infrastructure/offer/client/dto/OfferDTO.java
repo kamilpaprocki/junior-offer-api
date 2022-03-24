@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OfferDTO {
 
-
     @JsonIgnore
     private String id;
     @JsonProperty("company")
@@ -24,5 +23,4 @@ public class OfferDTO {
     private String salary;
     @JsonProperty("offerUrl")
     private String offerUrl;
-
 }

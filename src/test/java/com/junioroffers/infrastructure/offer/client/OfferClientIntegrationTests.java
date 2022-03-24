@@ -31,13 +31,14 @@ public class OfferClientIntegrationTests {
     WireMockServer wireMockServer;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         wireMockServer = new WireMockServer(options().port(port));
         wireMockServer.start();
         WireMock.configureFor(port);
     }
+
     @AfterEach
-    void stop(){
+    void stop() {
         wireMockServer.stop();
     }
 
@@ -45,44 +46,44 @@ public class OfferClientIntegrationTests {
     public void should_return_offerDTO_list() throws JSONException {
         //given
         WireMock.stubFor(WireMock.get("/offers")
-                        .willReturn(WireMock.aResponse()
+                .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
 
-                                .withHeader("Content-Type", "application/json")
-                                        .withBody(bodyWithJsons())));
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(bodyWithJsons())));
         //then
-      then(remoteOfferClient.getOffers()).containsExactlyInAnyOrderElementsOf(Arrays.asList(firstOfferDTO(), secondOfferDTO()));
+        then(remoteOfferClient.getOffers()).containsExactlyInAnyOrderElementsOf(Arrays.asList(firstOfferDTO(), secondOfferDTO()));
     }
 
     @Test
-    public void should_throw_HttpClientException_when_API_return_404_error(){
+    public void should_throw_HttpClientException_when_API_return_404_error() {
         //given
         WireMock.stubFor((WireMock.get("/offers")
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.NOT_FOUND.value())
                         .withHeader("Content-Type", "application/json"))));
         //then
-        assertThrows(HttpClientException.class, remoteOfferClient :: getOffers);
+        assertThrows(HttpClientException.class, remoteOfferClient::getOffers);
     }
 
     @Test
-    public void should_throw_OfferNotFoundException_when_API_return_empty_list(){
+    public void should_throw_OfferNotFoundException_when_API_return_empty_list() {
         //given
         WireMock.stubFor((WireMock.get("/offers").willReturn(WireMock.aResponse()
                 .withStatus(HttpStatus.OK.value())
                 .withHeader("Content-Type", "application/json").withBody(bodyWithEmptyJSONArray()))));
         //then
-        assertThrows(OfferNotFoundException.class, remoteOfferClient :: getOffers);
+        assertThrows(OfferNotFoundException.class, remoteOfferClient::getOffers);
     }
 
     @Test
-    public void should_throw_HttpClientException_when_is_wrong_endpoint(){
+    public void should_throw_HttpClientException_when_is_wrong_endpoint() {
         //given
         WireMock.stubFor((WireMock.get("/test")
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.NOT_FOUND.value()))));
         //then
-        assertThrows(HttpClientException.class, remoteOfferClient ::getOffers);
+        assertThrows(HttpClientException.class, remoteOfferClient::getOffers);
     }
 
     private String bodyWithJsons() throws JSONException {
@@ -91,24 +92,24 @@ public class OfferClientIntegrationTests {
 
         bodyJSONArray.put(
                 new JSONObject().put("company", "S2Innovation Sp. z o. o.")
-                .put("title", "Junior Remote Java Developer").
+                        .put("title", "Junior Remote Java Developer").
                         put("salary", "4k - 8k PLN")
-                .put("offerUrl", "https://nofluffjobs.com/pl/job/junior-remote-java-developer-s2innovation-krakow-stddogtj"));
+                        .put("offerUrl", "https://nofluffjobs.com/pl/job/junior-remote-java-developer-s2innovation-krakow-stddogtj"));
 
         bodyJSONArray.put(
                 new JSONObject().put("company", "HARMAN Connected Services")
-                .put("title", "Junior Java SE Developer for Automotive").
+                        .put("title", "Junior Java SE Developer for Automotive").
                         put("salary", "7k - 10k PLN")
-                .put("offerUrl", "https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha"));
+                        .put("offerUrl", "https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha"));
 
         return bodyJSONArray.toString();
     }
 
-    private String bodyWithEmptyJSONArray(){
+    private String bodyWithEmptyJSONArray() {
         return "[]";
     }
 
-    private OfferDTO firstOfferDTO(){
+    private OfferDTO firstOfferDTO() {
         return OfferDTO.builder()
                 .companyName("S2Innovation Sp. z o. o.")
                 .jobPosition("Junior Remote Java Developer")
@@ -117,14 +118,12 @@ public class OfferClientIntegrationTests {
                 .build();
     }
 
-    private OfferDTO secondOfferDTO(){
+    private OfferDTO secondOfferDTO() {
         return OfferDTO.builder()
                 .companyName("HARMAN Connected Services")
                 .jobPosition("Junior Java SE Developer for Automotive")
                 .salary("7k - 10k PLN")
                 .offerUrl("https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha")
                 .build();
-
     }
-
 }

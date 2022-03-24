@@ -8,12 +8,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
-
 import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class OfferClient implements RemoteOfferClient{
+public class OfferClient implements RemoteOfferClient {
 
     private final RestClient restClient;
 
@@ -26,14 +25,9 @@ public class OfferClient implements RemoteOfferClient{
             if (offerDTOList != null && offerDTOList.isEmpty()) {
                 throw new OfferNotFoundException("There are no offers");
             }
-
-        }catch (RestClientException e){
+        } catch (RestClientException e) {
             throw new HttpClientException(e.getMessage());
         }
-
         return offerDTOList;
-
     }
-
-
 }
