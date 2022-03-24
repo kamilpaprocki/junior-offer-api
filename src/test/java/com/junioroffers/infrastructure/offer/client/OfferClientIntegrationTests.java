@@ -1,6 +1,5 @@
 package com.junioroffers.infrastructure.offer.client;
 
-
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.junioroffers.infrastructure.offer.client.dto.OfferDTO;
