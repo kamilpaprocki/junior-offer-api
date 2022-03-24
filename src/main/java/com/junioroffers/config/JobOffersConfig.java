@@ -7,10 +7,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JobOffersConfig {
 
-    private final static String OFFER_URL = "http://programming-masterpiece.com:5057/offers";
+    private final String getOfferUrlEndpoint = "/offers";
 
     @Bean
-    protected RestClient restClientImpl(){
-        return new RestClient(OFFER_URL);
+    protected OfferUrlConfig offerUrlConfigImpl() {
+        return new OfferUrlConfig();
+    }
+
+    @Bean
+    protected RestClient restClientImpl() {
+        return new RestClient(offerUrlConfigImpl().getUrl() + getOfferUrlEndpoint);
     }
 }
