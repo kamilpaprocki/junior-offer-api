@@ -34,7 +34,7 @@ public class OfferClientTests {
         //GIVEN
         RestClient restClient = Mockito.mock(RestClient.class);
         when(restClient.callGetMethod(ArgumentMatchers.<ParameterizedTypeReference<List<OfferDto>>>any()))
-                .thenReturn(null);
+                .thenReturn(new ResponseEntity<>(Collections.emptyList(), HttpStatus.ACCEPTED));
         OfferClient offerClient = new OfferClient(restClient);
         //WHEN THEN
         assertThrows(OfferNotFoundException.class, offerClient::getOffers);

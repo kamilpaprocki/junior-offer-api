@@ -25,7 +25,7 @@ public class OfferClientIntegrationTests {
 
     int port = SocketUtils.findAvailableTcpPort();
     String uri = "http://localhost:" + port + "/offers";
-    RemoteOfferClient remoteOfferClient = new JobOfferTestConfig().remoteOfferClientTest(uri);
+    RemoteOfferClient remoteOfferClient = new JobOfferTestConfig().remoteOfferClientTestImpl(uri);
 
     WireMockServer wireMockServer;
 

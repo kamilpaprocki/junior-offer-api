@@ -3,6 +3,7 @@ package com.junioroffers.config;
 import com.junioroffers.infrastructure.offer.client.RestClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class JobOffersConfig {
@@ -15,7 +16,12 @@ public class JobOffersConfig {
     }
 
     @Bean
+    protected RestTemplate restTemplateImpl() {
+        return new RestTemplate();
+    }
+
+    @Bean
     protected RestClient restClientImpl() {
-        return new RestClient(offerUrlConfigImpl().getUrl() + getOfferUrlEndpoint);
+        return new RestClient(offerUrlConfigImpl().getUrl() + getOfferUrlEndpoint, restTemplateImpl());
     }
 }

@@ -1,15 +1,20 @@
 package com.junioroffers.infrastructure.offer.client;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class JobOfferTestConfig {
 
-    private RestClient restClient(String uri) {
-        return new RestClient(uri);
+    private RestClient restClientImpl(String uri) {
+        return new RestClient(uri, restTemplateImpl());
     }
 
-    public OfferClient remoteOfferClientTest(String uri) {
-        return new OfferClient(restClient(uri));
+    private RestTemplate restTemplateImpl() {
+        return new RestTemplate();
+    }
+
+    public OfferClient remoteOfferClientTestImpl(String uri) {
+        return new OfferClient(restClientImpl(uri));
     }
 }
