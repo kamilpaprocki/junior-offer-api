@@ -14,4 +14,8 @@ public class OfferService {
     public List<OfferDto> getOffers() {
         return offerRepository.getAllOffers();
     }
+
+    public OfferDto getOffer(Long id) {
+        return offerRepository.getOffer(id).orElse(null);
+    }
 }

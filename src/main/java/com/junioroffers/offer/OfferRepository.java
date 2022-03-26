@@ -31,4 +31,11 @@ public class OfferRepository {
                 "7k - 10k PLN",
                 "https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha"));
     }
+
+    public Optional<OfferDto> getOffer(Long id) {
+        if (!offers.containsKey(id)){
+            return Optional.empty();
+        }
+        return Optional.of(offers.get(id));
+    }
 }
