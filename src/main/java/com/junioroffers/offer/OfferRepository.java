@@ -2,7 +2,6 @@ package com.junioroffers.offer;
 
 import com.junioroffers.offer.domain.dto.OfferDto;
 import org.springframework.stereotype.Repository;
-
 import java.util.*;
 
 @Repository
@@ -45,5 +44,13 @@ public class OfferRepository {
         lastId++;
         offers.put((long) lastId, offerDto);
         return offerDto;
+    }
+
+    public int deleteOfferById(Long id) {
+        if (offers.containsKey(id)) {
+            offers.remove(id);
+            return 1;
+        }
+        return 0;
     }
 }

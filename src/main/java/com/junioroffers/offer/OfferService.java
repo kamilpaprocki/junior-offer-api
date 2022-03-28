@@ -22,4 +22,8 @@ public class OfferService {
     public OfferDto createOffer(OfferDto offerDto) {
         return offerRepository.createOffer(offerDto);
     }
+
+    public int deleteOfferById(Long id) {
+        return offerRepository.deleteOfferById(id);
+    }
 }

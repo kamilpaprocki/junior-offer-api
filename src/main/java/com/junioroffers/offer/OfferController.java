@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -38,4 +37,11 @@ public class OfferController {
         return new ResponseEntity<>(offerService.createOffer(offerDto), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/offers/{id}")
+    public ResponseEntity<OfferDto> deleteOffer(@PathVariable Long id) {
+        if (offerService.deleteOfferById(id) > 0) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
 }
