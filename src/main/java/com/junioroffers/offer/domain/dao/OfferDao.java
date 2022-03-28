@@ -1,10 +1,13 @@
 package com.junioroffers.offer.domain.dao;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @Builder
+@AllArgsConstructor
 public class OfferDao {
 
     private Long id;
