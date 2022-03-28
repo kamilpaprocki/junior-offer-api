@@ -22,11 +22,11 @@ public class OfferRepository {
     }
 
     private void implOffers() {
-        offers.put(1L, new OfferDto("S2Innovation Sp. z o. o.",
+        offers.put(1L, new OfferDto(1L, "S2Innovation Sp. z o. o.",
                 "Junior Remote Java Developer",
                 "4k - 8k PLN",
                 "https://nofluffjobs.com/pl/job/junior-remote-java-developer-s2innovation-krakow-stddogtj"));
-        offers.put(2L, new OfferDto("HARMAN Connected Services",
+        offers.put(2L, new OfferDto(2L, "HARMAN Connected Services",
                 "Junior Java SE Developer for Automotive",
                 "7k - 10k PLN",
                 "https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha"));
@@ -39,10 +39,15 @@ public class OfferRepository {
         return Optional.of(offers.get(id));
     }
 
-    public OfferDto createOffer(OfferDto offerDto) {
-        int lastId = offers.keySet().size();
-        lastId++;
-        offers.put((long) lastId, offerDto);
+    public OfferDto createOrUpdateOffer(OfferDto offerDto) {
+        if (offerDto.getId() == null) {
+            long lastId = offers.keySet().size();
+            lastId++;
+            offerDto.setId(lastId);
+            offers.put(lastId, offerDto);
+        } else {
+            offers.put(offerDto.getId(), offerDto);
+        }
         return offerDto;
     }
 

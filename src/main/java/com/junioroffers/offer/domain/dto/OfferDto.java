@@ -4,18 +4,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 public class OfferDto {
 
-    @JsonProperty(value = "companyName")
+    @JsonProperty("id")
+    private Long id;
+    @JsonProperty("companyName")
     private String companyName;
-    @JsonProperty(value = "jobPosition")
+    @JsonProperty("jobPosition")
     private String jobPosition;
-    @JsonProperty(value = "salary")
+    @JsonProperty("salary")
     private String salary;
-    @JsonProperty(value = "offerUrl")
+    @JsonProperty("offerUrl")
     private String offerUrl;
 }

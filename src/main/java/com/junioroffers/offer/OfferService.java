@@ -19,8 +19,8 @@ public class OfferService {
         return offerRepository.getOfferById(id).orElse(null);
     }
 
-    public OfferDto createOffer(OfferDto offerDto) {
-        return offerRepository.createOffer(offerDto);
+    public OfferDto createOrUpdateOffer(OfferDto offerDto) {
+        return offerRepository.createOrUpdateOffer(offerDto);
     }
 
     public int deleteOfferById(Long id) {

@@ -33,8 +33,11 @@ public class OfferController {
     }
 
     @PostMapping("/offers")
-    public ResponseEntity<OfferDto> createOffer(@RequestBody OfferDto offerDto) {
-        return new ResponseEntity<>(offerService.createOffer(offerDto), HttpStatus.CREATED);
+    public ResponseEntity<OfferDto> createOrUpdateOffer(@RequestBody OfferDto offerDto) {
+        if (offerDto.getId() != null) {
+            return new ResponseEntity<>(offerService.createOrUpdateOffer(offerDto), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(offerService.createOrUpdateOffer(offerDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/offers/{id}")
