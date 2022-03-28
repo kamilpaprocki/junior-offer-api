@@ -2,6 +2,7 @@ package com.junioroffers.offer;
 
 import com.junioroffers.offer.domain.dto.OfferDto;
 import org.springframework.stereotype.Repository;
+
 import java.util.*;
 
 @Repository
@@ -32,10 +33,17 @@ public class OfferRepository {
                 "https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha"));
     }
 
-    public Optional<OfferDto> getOffer(Long id) {
-        if (!offers.containsKey(id)){
+    public Optional<OfferDto> getOfferById(Long id) {
+        if (!offers.containsKey(id)) {
             return Optional.empty();
         }
         return Optional.of(offers.get(id));
+    }
+
+    public OfferDto createOffer(OfferDto offerDto) {
+        int lastId = offers.keySet().size();
+        lastId++;
+        offers.put((long) lastId, offerDto);
+        return offerDto;
     }
 }

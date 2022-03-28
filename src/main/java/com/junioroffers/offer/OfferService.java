@@ -15,7 +15,11 @@ public class OfferService {
         return offerRepository.getAllOffers();
     }
 
-    public OfferDto getOffer(Long id) {
-        return offerRepository.getOffer(id).orElse(null);
+    public OfferDto getOfferById(Long id) {
+        return offerRepository.getOfferById(id).orElse(null);
+    }
+
+    public OfferDto createOffer(OfferDto offerDto) {
+        return offerRepository.createOffer(offerDto);
     }
 }

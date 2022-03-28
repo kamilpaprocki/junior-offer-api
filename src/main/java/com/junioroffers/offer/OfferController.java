@@ -18,18 +18,24 @@ public class OfferController {
     @GetMapping("/offers")
     public ResponseEntity<List<OfferDto>> getOffers() {
         List<OfferDto> offers = offerService.getOffers();
-        if (offers.isEmpty()){
+        if (offers.isEmpty()) {
             throw new OfferNotFoundException("There are no offers");
         }
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
     @GetMapping("/offers/{id}")
-    public ResponseEntity<OfferDto> getOffer(@PathVariable Long id){
-        OfferDto offer = offerService.getOffer(id);
-        if (offer == null){
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable Long id) {
+        OfferDto offer = offerService.getOfferById(id);
+        if (offer == null) {
             throw new OfferNotFoundException("There is no offer with id: " + id);
         }
         return new ResponseEntity<>(offer, HttpStatus.OK);
     }
+
+    @PostMapping("/offers")
+    public ResponseEntity<OfferDto> createOffer(@RequestBody OfferDto offerDto) {
+        return new ResponseEntity<>(offerService.createOffer(offerDto), HttpStatus.CREATED);
+    }
+
 }
