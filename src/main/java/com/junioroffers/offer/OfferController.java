@@ -28,7 +28,7 @@ public class OfferController {
     }
 
     @GetMapping("/offers/{id}")
-    public ResponseEntity<OfferDto> getOfferById(@PathVariable Long id) {
+    public ResponseEntity<OfferDto> getOfferById(@PathVariable String id) {
         OfferDto offer = offerService.getOfferById(id);
         if (offer == null) {
             log.error("Offer with id {} not found.", id);
@@ -49,7 +49,7 @@ public class OfferController {
     }
 
     @DeleteMapping("/offers/{id}")
-    public ResponseEntity<OfferDto> deleteOffer(@PathVariable Long id) {
+    public ResponseEntity<OfferDto> deleteOffer(@PathVariable String id) {
         if (offerService.deleteOfferById(id) > 0) {
             log.info("Delete offer with id {}.", id);
             return new ResponseEntity<>(HttpStatus.OK);

@@ -16,4 +16,11 @@ public class OfferControllerErrorHandler {
     protected OfferErrorResponse handleOfferNotFoundException(RuntimeException e) {
         return new OfferErrorResponse(e.getMessage(), new Date().toString(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = WrongArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    protected OfferErrorResponse handleWrongArgumentException(RuntimeException e) {
+        return new OfferErrorResponse(e.getMessage(), new Date().toString(), HttpStatus.BAD_REQUEST);
+    }
 }
