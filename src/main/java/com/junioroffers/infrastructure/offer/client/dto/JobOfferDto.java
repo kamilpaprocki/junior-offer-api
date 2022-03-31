@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class OfferDto {
+public class JobOfferDto {
 
     @JsonIgnore
     private String id;

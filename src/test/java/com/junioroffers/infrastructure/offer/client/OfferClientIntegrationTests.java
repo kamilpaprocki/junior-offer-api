@@ -2,9 +2,9 @@ package com.junioroffers.infrastructure.offer.client;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import com.junioroffers.infrastructure.offer.client.dto.OfferDto;
+import com.junioroffers.infrastructure.offer.client.dto.JobOfferDto;
 import com.junioroffers.infrastructure.offer.client.exceptions.HttpClientException;
-import com.junioroffers.infrastructure.offer.client.exceptions.OfferNotFoundException;
+import com.junioroffers.infrastructure.offer.client.exceptions.JobOfferNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +72,7 @@ public class OfferClientIntegrationTests {
                 .withStatus(HttpStatus.OK.value())
                 .withHeader("Content-Type", "application/json").withBody(bodyWithEmptyJSONArray()))));
         //then
-        assertThrows(OfferNotFoundException.class, remoteOfferClient::getOffers);
+        assertThrows(JobOfferNotFoundException.class, remoteOfferClient::getOffers);
     }
 
     @Test
@@ -108,8 +108,8 @@ public class OfferClientIntegrationTests {
         return "[]";
     }
 
-    private OfferDto firstOfferDto() {
-        return OfferDto.builder()
+    private JobOfferDto firstOfferDto() {
+        return JobOfferDto.builder()
                 .companyName("S2Innovation Sp. z o. o.")
                 .jobPosition("Junior Remote Java Developer")
                 .salary("4k - 8k PLN")
@@ -117,8 +117,8 @@ public class OfferClientIntegrationTests {
                 .build();
     }
 
-    private OfferDto secondOfferDto() {
-        return OfferDto.builder()
+    private JobOfferDto secondOfferDto() {
+        return JobOfferDto.builder()
                 .companyName("HARMAN Connected Services")
                 .jobPosition("Junior Java SE Developer for Automotive")
                 .salary("7k - 10k PLN")
