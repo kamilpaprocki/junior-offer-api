@@ -2,8 +2,8 @@ package com.junioroffers.offer;
 
 import com.junioroffers.offer.config.OfferTestConfig;
 import com.junioroffers.offer.domain.OfferMapper;
-import com.junioroffers.offer.domain.dao.OfferDao;
 import com.junioroffers.offer.domain.dto.OfferDto;
+import com.junioroffers.offer.domain.dto.SampleOfferDaoImpl;
 import com.junioroffers.offer.domain.exceptions.WrongArgumentException;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-public class OfferServiceTest {
+public class OfferServiceTest implements SampleOfferDaoImpl {
 
     OfferRepository offerRepository = Mockito.mock(OfferRepository.class);
     OfferMapper offerMapper = new OfferTestConfig().offerMapperImpl();
@@ -113,25 +113,5 @@ public class OfferServiceTest {
     public void should_throw_WrongArgumentException_when_offer_id_is_not_a_number_in_delete_offer_by_id_method() {
         //GIVEN //WHEN //THEN
         assertThrows(WrongArgumentException.class, () -> offerService.deleteOfferById(""));
-    }
-
-    private OfferDao returnOneOfferDao() {
-        return OfferDao.builder()
-                .id(1L)
-                .companyName("HARMAN Connected Services")
-                .jobPosition("Junior Java SE Developer for Automotive")
-                .salary("7k - 10k PLN")
-                .offerUrl("https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha")
-                .build();
-    }
-
-    private OfferDao returnOneOfferDaoWithoutId() {
-        return OfferDao.builder()
-                .id(null)
-                .companyName("HARMAN Connected Services")
-                .jobPosition("Junior Java SE Developer for Automotive")
-                .salary("7k - 10k PLN")
-                .offerUrl("https://nofluffjobs.com/pl/job/junior-java-se-developer-for-automotive-harman-connected-services-lodz-yafxatha")
-                .build();
     }
 }
