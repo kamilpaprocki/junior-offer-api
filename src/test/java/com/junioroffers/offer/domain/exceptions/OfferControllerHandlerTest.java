@@ -1,11 +1,10 @@
 package com.junioroffers.offer.domain.exceptions;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import java.util.Date;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class OfferControllerHandlerTest {
+public class OfferControllerHandlerTest implements OfferExceptionsImpl {
 
     OfferControllerErrorHandler errorHandler = new OfferControllerErrorHandler();
 
@@ -27,21 +26,5 @@ public class OfferControllerHandlerTest {
         OfferErrorResponse receivedOfferResponse = errorHandler.handleWrongArgumentException(returnWrongArgumentException());
         //THEN
         assertThat(expectedOfferResponse).isEqualTo(receivedOfferResponse);
-    }
-
-    private OfferNotFoundException returnOfferNotFoundException() {
-        return new OfferNotFoundException("");
-    }
-
-    private OfferErrorResponse returnOfferErrorResponseWithOfferNotFoundException() {
-        return new OfferErrorResponse("", new Date().toString(), HttpStatus.NOT_FOUND);
-    }
-
-    private WrongArgumentException returnWrongArgumentException() {
-        return new WrongArgumentException("");
-    }
-
-    private OfferErrorResponse returnOfferErrorResponseWithWrongArgumentException() {
-        return new OfferErrorResponse("", new Date().toString(), HttpStatus.BAD_REQUEST);
     }
 }
